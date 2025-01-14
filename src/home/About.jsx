@@ -1,7 +1,8 @@
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
-import img1 from "../assets/images/instructor/Arshad.jpg";
-import img2 from "../assets/images/instructor/Muntakim.jpg";
+const img1 = "/images/instructor/Arshad.jpg";
+const img2 = "/images/instructor/Muntakim.jpg";
+
 
 const subTitle = "Why Choose Us";
 const title = "Become a Merchant";

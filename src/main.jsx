@@ -24,6 +24,7 @@ import Login from "./components/Login";
 import AuthProvider from "./context/AuthProvider";
 import SignUp from "./components/SignUp";
 import ErrorPage from "./components/ErrorPage";
+// import ScrollToTop from "./components/ScrollToTop";
 
 const router = createBrowserRouter([
   {
@@ -67,17 +68,17 @@ const router = createBrowserRouter([
         element: <Contact />,
         errorElement: <ErrorPage />,
       },
+      {
+        path: "/login",
+        element: <Login />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/sign-up",
+        element: <SignUp />,
+        errorElement: <ErrorPage />,
+      },
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/sign-up",
-    element: <SignUp />,
-    errorElement: <ErrorPage />,
   },
 ]);
 

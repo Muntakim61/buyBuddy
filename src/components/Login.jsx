@@ -15,6 +15,11 @@ const btnText = "Login Now";
 const socialList = [
   {
     link: "#",
+    iconName: "icofont-github",
+    className: "github",
+  },
+  {
+    link: "#",
     iconName: "icofont-facebook",
     className: "facebook",
   },
@@ -42,7 +47,7 @@ const socialList = [
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
-  const { signUpWithGmail, login,user } = useContext(AuthContext);
+  const { signUpWithGmail, login, user } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -53,7 +58,7 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-  
+
     login(email, password)
       .then((result) => {
         const user = result.user;
@@ -73,7 +78,7 @@ const Login = () => {
         });
       });
   };
-  
+
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -95,7 +100,7 @@ const Login = () => {
         });
       });
   };
-  
+
   // const handleRegister = () => {
   //   signUpWithGmail()
   //     .then((result) => {
@@ -116,13 +121,18 @@ const Login = () => {
   //       });
   //     });
   // };
-  
+
   return (
     <div className="login-section padding-tb section-bg">
       <div className="container">
-        <div className="account-wrapper">
+        <div
+          className="account-wrapper"
+          // style={{
+          //   marginTop: "150px",
+          // }}
+        >
           <h3 className="title">{title}</h3>
-          <form className="account-form" onSubmit={handleLogin}>
+          <form className="account-form " onSubmit={handleLogin}>
             <div className="form-group">
               <input
                 type="email"
@@ -183,12 +193,12 @@ const Login = () => {
             {/*Social login */}
             <h5 className="subtitle">{socialTitle}</h5>
             <ul className="la-ul social-icons justify-content-center">
-              <button className="github mb-1"  onClick={handleGoogleLogin}>
+              {/* <button className="github mb-1" onClick={handleGoogleLogin}>
                 <i className="icofont-github"></i>
-              </button>
+              </button> */}
               {socialList.map((val, i) => (
                 <li key={i}>
-                  <a href={val.link}  className={`${val.className} gap-4`}>
+                  <a onClick={handleGoogleLogin} className={`${val.className} gap-4`}>
                     <i className={val.iconName}></i>
                   </a>
                 </li>

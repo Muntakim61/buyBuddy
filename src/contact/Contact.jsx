@@ -12,28 +12,28 @@ const Contact = () => {
 
     const contactList = [
         {
-            imgUrl: "/src/assets/images/icon/01.png",
+            imgUrl: "/images/icon/01.png",
             imgAlt: "contact icon",
             title: "Office Address",
             desc: "1201 park street, Fifth Avenue",
         },
         {
-            imgUrl: "/src/assets/images/icon/02.png",
+            imgUrl: "/images/icon/02.png",
             imgAlt: "contact icon",
             title: "Phone number",
             desc: "+22698 745 632,02 982 745",
         },
         {
-            imgUrl: "/src/assets/images/icon/03.png",
+            imgUrl: "/images/icon/03.png",
             imgAlt: "contact icon",
             title: "Send email",
-            desc: "admin@shopcart.com",
+            desc: "admin@buyBuddy.com",
         },
         {
-            imgUrl: "/src/assets/images/icon/04.png",
+            imgUrl: "/images/icon/04.png",
             imgAlt: "contact icon",
             title: "Our website",
-            desc: "www.shopcart.com",
+            desc: "www.buyBuddy.com",
         },
     ];
     return (

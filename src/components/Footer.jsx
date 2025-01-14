@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const title = "About buyBuddy";
 const desc =
-  "buyBuddy is your go-to e-commerce platform, providing a seamless online shopping experience. Our virtual shopcart enables you to select, store, and review items effortlessly before checking out, making your shopping journey convenient and enjoyable.";
+  "buyBuddy is your go-to e-commerce platform, providing a seamless online shopping experience. Our virtual buyBuddy enables you to select, store, and review items effortlessly before checking out, making your shopping journey convenient and enjoyable.";
 const ItemTitle = "Categories";
 const quickTitle = "Quick Links";
 const tweetTitle = "Recent Tweets";

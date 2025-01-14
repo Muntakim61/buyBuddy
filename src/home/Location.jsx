@@ -7,37 +7,37 @@ const desc = "Buy products on your any device with our app & enjoy your time wha
 
 const clientsList = [
     {
-        imgUrl: '/src/assets/images/clients/avater.jpg',
+        imgUrl: '/images/clients/avater.jpg',
         imgAlt: 'education thumb rajibraj91 rajibraj',
         text: 'USA',
     },
     {
-        imgUrl: '/src/assets/images/clients/avater.jpg',
+        imgUrl: '/images/clients/avater.jpg',
         imgAlt: 'education thumb rajibraj91 rajibraj',
         text: 'Denmark',
     },
     {
-        imgUrl: '/src/assets/images/clients/avater.jpg',
+        imgUrl: '/images/clients/avater.jpg',
         imgAlt: 'education thumb rajibraj91 rajibraj',
         text: 'Kazakhstan',
     },
     {
-        imgUrl: '/src/assets/images/clients/avater.jpg',
+        imgUrl: '/images/clients/avater.jpg',
         imgAlt: 'education thumb rajibraj91 rajibraj',
         text: 'Brazil',
     },
     {
-        imgUrl: '/src/assets/images/clients/avater.jpg',
+        imgUrl: '/images/clients/avater.jpg',
         imgAlt: 'education thumb rajibraj91 rajibraj',
         text: 'South Africa',
     },
     {
-        imgUrl: '/src/assets/images/clients/avater.jpg',
+        imgUrl: '/images/clients/avater.jpg',
         imgAlt: 'education thumb rajibraj91 rajibraj',
         text: 'Malaysia',
     },
     {
-        imgUrl: '/src/assets/images/clients/avater.jpg',
+        imgUrl: '/images/clients/avater.jpg',
         imgAlt: 'education thumb rajibraj91 rajibraj',
         text: 'Russia',
     },

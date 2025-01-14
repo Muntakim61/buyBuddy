@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo/elogo.png";
+const logo =  "/images/logo/elogo.png";
 import { AuthContext } from "../context/AuthProvider";
 import Swal from "sweetalert2";
 

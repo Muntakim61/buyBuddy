@@ -9,6 +9,11 @@ const btnText = "SignUp Now";
 const socialList = [
   {
     link: "#",
+    iconName: "icofont-github",
+    className: "github",
+  },
+  {
+    link: "#",
     iconName: "icofont-facebook",
     className: "facebook",
   },
@@ -157,19 +162,24 @@ const SignUp = () => {
             </span>
 
             {/*social login */}
-            <h5 className="subtitle">{socialTitle}</h5>
-            <ul className="la-ul social-icons justify-content-center">
-              <button className="github mb-1" onClick={handleGoogleRegister}>
-                <i className="icofont-github"></i>
-              </button>
-              {socialList.map((val, i) => (
-                <li key={i}>
-                  <a href="#" className={val.className}>
-                    <i className={val.iconName}>{val.siteLink}</i>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div className="d-flex flex-column align-items-center  justify-content-center">
+              <h5 className="subtitle">{socialTitle}</h5>
+              <ul className="la-ul social-icons">
+                {/* <button className="github mb-1" onClick={handleGoogleRegister}>
+                  <i className="icofont-github"></i>
+                </button> */}
+                {socialList.map((val, i) => (
+                  <li key={i}>
+                    <a
+                      onClick={handleGoogleRegister}
+                      className={val.className}
+                    >
+                      <i className={val.iconName}>{val.siteLink}</i>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
