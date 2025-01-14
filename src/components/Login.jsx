@@ -67,7 +67,7 @@ const Login = () => {
           text: "Welcome back!",
           icon: "success",
         });
-        navigate(from, { replace: true });
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.message);
@@ -88,6 +88,7 @@ const Login = () => {
           text: "You have successfully logged in using Google.",
           icon: "success",
         });
+        navigate("/");
       })
       .catch((error) => {
         const Message = error.message;

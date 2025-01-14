@@ -50,12 +50,31 @@ const SignUp = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
-    console.log(form);
     const email = form.email.value;
     const password = form.password.value;
     const name = form.name.value;
     const confirmPassword = form.confirmPassword.value;
-    console.log(name, email, password, confirmPassword);
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords don't match");
+      Swal.fire({
+        title: "Error!",
+        text: "Passwords don't match. Please try again.",
+        icon: "error",
+      });
+      return;
+    }
+
+    if (password.length < 6) {
+      setErrorMessage("Password must be at least 6 characters long");
+      Swal.fire({
+        title: "Error!",
+        text: "Password must be at least 6 characters long.",
+        icon: "error",
+      });
+      return;
+    }
+
     createUser(email, password)
       .then((user) => {
         Swal.fire({
@@ -74,9 +93,8 @@ const SignUp = () => {
           icon: "error",
         });
       });
-
-    console.log("Email : ", user.email, "UID : ", user.uid);
   };
+
   const handleGoogleRegister = () => {
     signUpWithGmail()
       .then((result) => {
@@ -85,10 +103,7 @@ const SignUp = () => {
           text: "Your account has been registered successfully.",
           icon: "success",
         });
-        setTimeout(() => {
-          navigate(from, { replace: true });
-        }, 2000);
-        navigate(from, { replace: true });
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.message);
@@ -170,10 +185,7 @@ const SignUp = () => {
                 </button> */}
                 {socialList.map((val, i) => (
                   <li key={i}>
-                    <a
-                      onClick={handleGoogleRegister}
-                      className={val.className}
-                    >
+                    <a onClick={handleGoogleRegister} className={val.className}>
                       <i className={val.iconName}>{val.siteLink}</i>
                     </a>
                   </li>
