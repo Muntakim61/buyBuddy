@@ -5,9 +5,9 @@ import GoogleMap from '../components/GoogleMap';
 const Contact = () => {
     const subTitle = "Get in touch with us";
     const title = "We're Always Eager To Hear From You!";
-    const conSubTitle = "Get in touch with Contact us";
+    const conSubTitle = "Connect With Us";
     const conTitle =
-        "Fill The Form Below So We Can Get To Know You And Your Needs Better.";
+        "Complete the form below to help us understand your needs and serve you better.";
     const btnText = "Send our Message";
 
     const contactList = [

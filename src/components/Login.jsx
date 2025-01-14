@@ -3,6 +3,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import app from "../firebase/firebase.config";
 import { AuthContext } from "../context/AuthProvider";
+import Swal from "sweetalert2";
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
@@ -41,7 +42,7 @@ const socialList = [
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
-  const { signUpWithGmail, login } = useContext(AuthContext);
+  const { signUpWithGmail, login,user } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -50,46 +51,72 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
-    console.log(form);
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+  
     login(email, password)
       .then((result) => {
         const user = result.user;
-        alert("Login successfull");
+        Swal.fire({
+          title: "Login Successful!",
+          text: "Welcome back!",
+          icon: "success",
+        });
         navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error.message);
-        setErrorMessage("Please provide  valid email & password!!");
+        Swal.fire({
+          title: "Login Failed!",
+          text: "Please provide a valid email & password.",
+          icon: "error",
+        });
       });
   };
+  
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        alert("Login Successfully Done!");
+        Swal.fire({
+          title: "Login Successful!",
+          text: "You have successfully logged in using Google.",
+          icon: "success",
+        });
       })
       .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
+        const Message = error.message;
+        setErrorMessage(Message);
         console.log(errorMessage);
+        Swal.fire({
+          title: "Login Failed!",
+          text: errorMessage || "Something went wrong. Please try again.",
+          icon: "error",
+        });
       });
   };
-  const handleRegister = () => {
-    signUpWithGmail()
-      .then((result) => {
-        const registeredUser = result.user;
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setErrorMessage("Please provide valid email & password!!");
-      });
-  };
+  
+  // const handleRegister = () => {
+  //   signUpWithGmail()
+  //     .then((result) => {
+  //       const registeredUser = result.user;
+  //       Swal.fire({
+  //         title: "Registration Successful!",
+  //         text: "Your account has been registered successfully.",
+  //         icon: "success",
+  //       });
+  //       navigate(from, { replace: true });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //       Swal.fire({
+  //         title: "Registration Failed!",
+  //         text: "Please provide valid email & password.",
+  //         icon: "error",
+  //       });
+  //     });
+  // };
+  
   return (
     <div className="login-section padding-tb section-bg">
       <div className="container">
@@ -144,7 +171,7 @@ const Login = () => {
 
           <div className="account-button">
             <span className="d-block cate pt-10">
-              Don't Have a Account?{" "}
+              Don&apos;t Have a Account?{" "}
               <Link to="/sign-up" className="text-warning">
                 Sign Up
               </Link>
@@ -156,7 +183,7 @@ const Login = () => {
             {/*Social login */}
             <h5 className="subtitle">{socialTitle}</h5>
             <ul className="la-ul social-icons justify-content-center">
-              <button className="github mb-1"  onClick={handleRegister}>
+              <button className="github mb-1"  onClick={handleGoogleLogin}>
                 <i className="icofont-github"></i>
               </button>
               {socialList.map((val, i) => (

@@ -2,11 +2,13 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo/elogo.png";
 import { AuthContext } from "../context/AuthProvider";
+import Swal from "sweetalert2";
 
 const NavItems = () => {
   const [menuToggle, setMenuToggle] = useState(false);
   const [socialToggle, setSocialToggle] = useState(false);
   const [headerFixed, setHeaderFixed] = useState(false);
+  const {logout} = useContext(AuthContext);
 
   //authinfo
   const { user } = useContext(AuthContext);
@@ -20,6 +22,28 @@ const NavItems = () => {
       setHeaderFixed(false);
     }
   });
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out of your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log me out!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logout();
+        Swal.fire({
+          title: "Logged Out!",
+          text: "You have been logged out successfully.",
+          icon: "success",
+        });
+      }
+    });
+  };
+  
   return (
     <header
       className={`header-section style-4 ${
@@ -48,7 +72,7 @@ const NavItems = () => {
                   <img
                     src="https://i.ibb.co.com/8cVhSZj/buyBuddy.webp"
                     className="img-fluid rounded-circle"
-                    style={{ width: "70px", height: "70px" }} 
+                    style={{ width: "70px", height: "70px" }}
                     alt=""
                   />
                 </Link>
@@ -76,12 +100,31 @@ const NavItems = () => {
                 </ul>
               </div>
               {/*sign up and login*/}
-              <Link to="/sign-up" className="lab-btn me-3 d-none d-md-block">
+              {/* <Link to="/sign-up" className="lab-btn me-3 d-none d-md-block">
                 Create Account
               </Link>
               <Link to="/login" className="d-none d-md-block">
                 Log In
-              </Link>
+              </Link> */}
+              {user ? (
+                <>
+                  <Link onClick={handleLogout} className="lab-btn me-3 d-none d-md-block">
+                    Log Out
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/sign-up"
+                    className="lab-btn me-3 d-none d-md-block"
+                  >
+                    Create Account
+                  </Link>
+                  <Link to="/login" className="d-none d-md-block">
+                    Log In
+                  </Link>
+                </>
+              )}
 
               {/*menu toggler*/}
               <div

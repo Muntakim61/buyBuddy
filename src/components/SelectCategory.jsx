@@ -1,6 +1,6 @@
 import React from 'react'
 
-{/*Selectet Category */}
+{/*Selected Category */}
 const SelectCategory = (select) => {
     return (
         <select>

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
+import Swal from "sweetalert2";
 const title = "Register Now";
 const socialTitle = "Register with Social Media";
 const btnText = "SignUp Now";
@@ -34,6 +36,12 @@ const socialList = [
 
 const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const { signUpWithGmail, login, user, createUser } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -41,8 +49,50 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const name = form.name.value;
-    const confirmPassword = form.confirmpassword.value;
+    const confirmPassword = form.confirmPassword.value;
     console.log(name, email, password, confirmPassword);
+    createUser(email, password)
+      .then((user) => {
+        Swal.fire({
+          title: "Registered!",
+          text: "Your account has been registered successfully.",
+          icon: "success",
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const message = error.message;
+        setErrorMessage(message);
+        Swal.fire({
+          title: "Sorry!",
+          text: errorMessage || "Something went wrong.",
+          icon: "error",
+        });
+      });
+
+    console.log("Email : ", user.email, "UID : ", user.uid);
+  };
+  const handleGoogleRegister = () => {
+    signUpWithGmail()
+      .then((result) => {
+        Swal.fire({
+          title: "Registered!",
+          text: "Your account has been registered successfully.",
+          icon: "success",
+        });
+        setTimeout(() => {
+          navigate(from, { replace: true });
+        }, 2000);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        Swal.fire({
+          title: "Sorry!",
+          text: "Something went wrong.",
+          icon: "error",
+        });
+      });
   };
   return (
     <div className="login-section padding-tb section-bg">
@@ -80,8 +130,8 @@ const SignUp = () => {
             <div className="form-group">
               <input
                 type="password"
-                name="confirmpassword"
-                id="confirmpassword"
+                name="confirmPassword"
+                id="confirmPassword"
                 placeholder="Confirm Password"
                 required
               />
@@ -109,6 +159,9 @@ const SignUp = () => {
             {/*social login */}
             <h5 className="subtitle">{socialTitle}</h5>
             <ul className="la-ul social-icons justify-content-center">
+              <button className="github mb-1" onClick={handleGoogleRegister}>
+                <i className="icofont-github"></i>
+              </button>
               {socialList.map((val, i) => (
                 <li key={i}>
                   <a href="#" className={val.className}>
